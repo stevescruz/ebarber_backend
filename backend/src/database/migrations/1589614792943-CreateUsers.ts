@@ -1,5 +1,4 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
-import { id } from 'date-fns/locale';
 
 export default class CreateUsers1589614792943 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -9,7 +8,7 @@ export default class CreateUsers1589614792943 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'varchar',
+            type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
             default: 'uuid_generate_v4()',
@@ -22,13 +21,22 @@ export default class CreateUsers1589614792943 implements MigrationInterface {
           {
             name: 'email',
             type: 'varchar',
-            isUnique: false,
+            isUnique: true,
           },
           {
-            name: 'date_created',
+            name: 'password',
+            type: 'varchar',
+            isNullable: false,
           },
           {
-            name: 'date_updated',
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'now()',
           },
         ],
       }),

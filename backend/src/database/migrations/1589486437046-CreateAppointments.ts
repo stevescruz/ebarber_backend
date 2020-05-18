@@ -1,6 +1,4 @@
-import { MigrationInterface, QueryRunner, Table, Column } from 'typeorm';
-import { id } from 'date-fns/locale';
-import { uuid } from 'uuidv4';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export default class CreateAppointments1589486437046
   implements MigrationInterface {
@@ -11,7 +9,7 @@ export default class CreateAppointments1589486437046
         columns: [
           {
             name: 'id',
-            type: 'varchar',
+            type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
             default: 'uuid_generate_v4()',
@@ -25,6 +23,16 @@ export default class CreateAppointments1589486437046
             name: 'date',
             type: 'timestamp with time zone',
             isNullable: false,
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'now()',
           },
         ],
       }),
