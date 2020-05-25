@@ -3,6 +3,9 @@ import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
 import authConfig from '../config/auth';
+
+import AppError from '../errors/AppError';
+
 import User from '../models/User';
 
 interface RequestDTO {
@@ -21,13 +24,13 @@ class AuthenticateUserService {
     const user = await userRepository.findOne({ where: { email } });
 
     if (!user) {
-      throw new Error('Incorrect combination of email and password.');
+      throw new AppError('Incorrect combination of email and password.', 401);
     }
 
     const checkPasswordMatch = await compare(password, user.password);
 
     if (!checkPasswordMatch) {
-      throw new Error('Incorrect combination of email and password.');
+      throw new AppError('Incorrect combination of email and password.', 401);
     }
 
     const { secret, expiresIn } = authConfig.jwt;

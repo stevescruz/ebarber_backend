@@ -1,7 +1,10 @@
 import { startOfHour } from 'date-fns';
 import { getCustomRepository } from 'typeorm';
 
+import AppError from '../errors/AppError';
+
 import Appointment from '../models/Appointment';
+
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 
 interface RequestDTO {
@@ -22,7 +25,7 @@ class CreateAppointmentService {
     );
 
     if (checkAppointmentInSameDate) {
-      throw new Error(
+      throw new AppError(
         `An appointment at ${appointmentDate} was already booked.`,
       );
     }

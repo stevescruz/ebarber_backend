@@ -14,7 +14,7 @@ export default class AlterProviderFieldToProviderId1589698189002
       new TableColumn({
         name: 'provider_id',
         type: 'uuid',
-        isNullable: false,
+        isNullable: true,
       }),
     );
     await queryRunner.createForeignKey(
