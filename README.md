@@ -26,7 +26,7 @@
 
 ## Goal
 
-The goal is to create a full project using Node.js, ReactJS, and React Native from start to finish, fulfilling all possible steps: preparing the development environment with Docker, configuring tools that help maintain code quality (EditorConfig, ESLint and Prettier) to testing with Jest, deploying, and all the coding in between.
+The goal is to create a full project using Node.js, ReactJS, and React Native from start to finish, fulfilling all possible steps: preparing the development environment with Docker, configuring tools that help maintain code quality (EditorConfig, ESLint and Prettier), to applying DDD methodologies, automated testing with Jest, deploying, and all the coding in between.
 
 eBarber API makes the data that is required to provide the services available to be consumed by our front-end applications:
   eBarber web and eBarber mobile.
@@ -60,6 +60,18 @@ eBarber API makes the data that is required to provide the services available to
 - [x] Exception Handling
   - [x] Error Class
   - [x] Global Exception Handler (Middleware)
+- [x] Domain-driven Design (DDD) Methodologies
+  - [x] Reorganized Project File Structure
+  - [x] Refactored code to comply with Liskov Substitution Principle
+  - [x] Refactored code to comply with Dependency Inversion
+  - [x] Applied Dependency Injection with TSyringe
+  - [x] Isolated Hash Provider
+  - [x] Isolated Storage Provider
+- [x] Test-driven Development (TDD)
+  - [x] Jest
+  - [x] Coverage Reports
+  - [x] Unit Tests for every Service related to Users
+  - [x] Unit Tests for every Service related to Appointments
 - [ ] More steps comming soon...
 
 ## Technologies
