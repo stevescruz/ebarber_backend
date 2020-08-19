@@ -29,7 +29,7 @@ describe('UpdateUserAvatar', () => {
     expect(user.avatar).toBe('avatar.jpg');
   });
 
-  it("shouldn't be able to add or update an nonexistent user's avatar", async () => {
+  it("should not be able to add or update an nonexistent user's avatar", async () => {
     const fakeUsersRepository = new FakeUsersRepository();
     const fakeStorageProvider = new FakeStorageProvider();
 
@@ -38,7 +38,7 @@ describe('UpdateUserAvatar', () => {
       fakeStorageProvider,
     );
 
-    expect(
+    await expect(
       updateUserAvatarService.execute({
         user_id: 'd06895cc-2488-45a2-8732-51b65d909837',
         avatarFilename: 'avatar.jpg',
