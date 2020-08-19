@@ -28,12 +28,12 @@ describe('CreateAppointment', () => {
 
     const date = new Date(20, 9, 10, 11);
 
-    await createAppointmentService.execute({
+    await fakeAppointmentsRepository.create({
       date,
       provider_id: '5cd19d9f-6771-4c50-8457-3d7faabea4dd',
     });
 
-    expect(
+    await expect(
       createAppointmentService.execute({
         date,
         provider_id: '5a4edc68-d582-4653-af9b-5d425e8e384d',

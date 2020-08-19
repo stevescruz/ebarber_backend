@@ -24,7 +24,7 @@ describe('CreateUser', () => {
     expect(user.email).toBe('uther@blizzard.com');
   });
 
-  it("shouldn't be able to create a user with a previously used email", async () => {
+  it('should not be able to create a user with a previously used email', async () => {
     const fakeUsersRepository = new FakeUsersRepository();
     const fakeHashProvider = new FakeHashProvider();
     const createUserService = new CreateUserService(
@@ -32,13 +32,13 @@ describe('CreateUser', () => {
       fakeHashProvider,
     );
 
-    await createUserService.execute({
+    await fakeUsersRepository.create({
       name: 'Uther the Lightbringer',
       email: 'uther@blizzard.com',
       password: 'silverorder',
     });
 
-    expect(
+    await expect(
       createUserService.execute({
         name: 'Jaina Proudmore',
         email: 'uther@blizzard.com',
