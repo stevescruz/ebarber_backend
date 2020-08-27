@@ -49,7 +49,7 @@ describe('SendEmailPasswordRecoveryService', () => {
     ).rejects.toBeInstanceOf(AppError);
   });
 
-  it('Should generate a password recovery user token', async () => {
+  it('Should generate a user token for password recovery', async () => {
     const generateUserToken = jest.spyOn(
       fakeUserTokensRepository,
       'generateUserToken',
