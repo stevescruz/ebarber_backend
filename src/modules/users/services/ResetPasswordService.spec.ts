@@ -66,4 +66,17 @@ describe('ResetPasswordService', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('The user should not be able to reset his password if he is a non-existent user.', async () => {
+    const { token } = await fakeUserTokensRepository.generateUserToken(
+      'd06895cc-2488-45a2-8732-51b65d909837',
+    );
+
+    await expect(
+      resetPasswordService.execute({
+        token,
+        password: 'scourge',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });
