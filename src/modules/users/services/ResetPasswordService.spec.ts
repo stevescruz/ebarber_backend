@@ -3,6 +3,7 @@ import FakeUserTokensRepository from '@modules/users/repositories/fakes/FakeUser
 import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider';
 
 import ResetPasswordService from '@modules/users/services/ResetPasswordService';
+import AppError from '@shared/errors/AppError';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeUserTokensRepository: FakeUserTokensRepository;
@@ -55,5 +56,14 @@ describe('ResetPasswordService', () => {
 
     expect(generateHash).toBeCalledWith('scourge');
     expect(updatedUser?.password).toBe('scourge');
+  });
+
+  it('The user should not be able to reset his password with a non-existent token.', async () => {
+    await expect(
+      resetPasswordService.execute({
+        token: '1c60ed89-a4cb-4c3a-9910-23d2fc5c9f97',
+        password: 'scourge',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
