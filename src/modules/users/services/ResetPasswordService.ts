@@ -1,4 +1,5 @@
 import { injectable, inject } from 'tsyringe';
+import { differenceInSeconds } from 'date-fns';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 
@@ -30,6 +31,13 @@ class ResetPasswordService {
     if (!userToken) {
       throw new AppError('User token does not exist.');
     }
+
+    const currentDate = Date.now();
+
+    if (differenceInSeconds(currentDate, userToken.created_at) > 7200) {
+      throw new AppError('User token has expired.');
+    }
+
     const user = await this.usersRepository.findById(userToken.user_id);
 
     if (!user) {

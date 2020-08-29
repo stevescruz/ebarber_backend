@@ -79,4 +79,27 @@ describe('ResetPasswordService', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it("Should not be able to reset the user's password after 2 hours, when the token expires.", async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Uther the Lightbringer',
+      email: 'uther@blizzard.com',
+      password: 'silverorder',
+    });
+
+    jest.spyOn(Date, 'now').mockImplementationOnce(() => {
+      const date = new Date();
+
+      return date.setSeconds(date.getSeconds() + 7201);
+    });
+
+    const { token } = await fakeUserTokensRepository.generateUserToken(user.id);
+
+    await expect(
+      resetPasswordService.execute({
+        token,
+        password: 'scourge',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });
