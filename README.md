@@ -72,7 +72,7 @@ eBarber API makes the data that is required to provide the services available to
   - [x] Coverage Reports
   - [x] Unit Tests for every Service related to Users
   - [x] Unit Tests for every Service related to Appointments
-- [ ] More steps comming soon...
+- [ ] More steps coming soon...
 
 ## Technologies
 
@@ -97,7 +97,7 @@ This project was developed with the following technologies:
 
 ## How To Use
 
-To clone and run this application, you'll need [Git](https://git-scm.com), [Docker](https://www.docker.com/), [Node.js v10.16][nodejs] (or higher), and [Yarn v1.13][yarn] (or higher) installed on your computer. From your command line:
+To clone and run this application, you need [Git](https://git-scm.com), [Docker](https://www.docker.com/), [Node.js v10.16][nodejs] (or higher), and [Yarn v1.13][yarn] (or higher) installed on your computer. From your command line:
 
 ```bash
 # Clone this repository
