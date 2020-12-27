@@ -5,7 +5,10 @@
   - [ ] The user should be able to retrieve his password by informing his email.
   - [ ] The user shouldn't be able to retrieve his password by informing a non-existent email.
   - [ ] The user should receive an email with instructions to retrieve his password.
+    - [ ] Should generate a user token for password recovery
   - [ ] The user should be able to reset his password.
+    - [ ] Should hash the user's new password.
+    - [ ] Should not be able to reset the user's password after the token is expired.
 
   **NFR**
 
