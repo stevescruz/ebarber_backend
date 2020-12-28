@@ -33,7 +33,10 @@ class SendEmailPasswordRecoveryService {
 
     await this.userTokensRepository.generateUserToken(user.id);
 
-    this.mailProvider.sendEmail(email, 'Request for password reset received.');
+    await this.mailProvider.sendEmail(
+      email,
+      'Request for password reset received.',
+    );
   }
 }
 
