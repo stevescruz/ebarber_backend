@@ -72,6 +72,12 @@ eBarber API makes the data that is required to provide the services available to
   - [x] Coverage Reports
   - [x] Unit Tests for every Service related to Users
   - [x] Unit Tests for every Service related to Appointments
+- [x] Password Recovery
+  - [x] Nodemailer to handle emails
+  - [x] Ethereal fake SMTP server for development environment
+  - [x] Email templates with Handlebars template engine
+  - [x] Send Password Recovery Email
+  - [x] Password Reset
 - [ ] More steps coming soon...
 
 ## Technologies
@@ -90,6 +96,11 @@ This project was developed with the following technologies:
 -  [JSON Web Token](https://github.com/auth0/node-jsonwebtoken)
 -  [Bcrypt.js](https://github.com/dcodeIO/bcrypt.js/)
 -  [Multer](https://github.com/expressjs/multer)
+-  [Nodemailer](https://nodemailer.com/about/)
+-  [Handlebars](https://handlebarsjs.com/)
+-  [Ethereal](https://ethereal.email/)
+-  [Jest](https://jestjs.io/)
+-  [TSyringe](https://github.com/microsoft/tsyringe)
 -  [VS Code][vc] with [EditorConfig][vceditconfig], [ESLint][vceslint] and [Prettier][vcprettier]
 -  [Docker](https://www.docker.com/)
 -  [DBeaver](https://dbeaver.io/)
