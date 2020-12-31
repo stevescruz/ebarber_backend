@@ -33,10 +33,20 @@ class SendEmailPasswordRecoveryService {
       user.id,
     );
 
-    await this.mailProvider.sendEmail(
-      email,
-      `Request for password reset received: ${token}`,
-    );
+    await this.mailProvider.sendEmail({
+      to: {
+        name: user.name,
+        email: user.email,
+      },
+      subject: '[eBarber] Password Recovery',
+      templateData: {
+        template: 'Hello, {{name}}: {{token}}',
+        variables: {
+          name: user.name,
+          token,
+        },
+      },
+    });
   }
 }
 
