@@ -1,3 +1,5 @@
+import ISendMailDTO from '@shared/container/providers/MailProvider/dtos/ISendMailDTO';
+
 export default interface IMailProvider {
-  sendEmail(to: string, body: string): Promise<void>;
+  sendEmail(data: ISendMailDTO): Promise<void>;
 }
