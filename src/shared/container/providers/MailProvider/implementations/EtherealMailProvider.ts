@@ -1,6 +1,8 @@
 import nodemailer, { Transporter } from 'nodemailer';
 
 import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
+import ISendMailDTO from '@shared/container/providers/MailProvider/dtos/ISendMailDTO';
+import Mail from 'nodemailer/lib/mailer';
 
 export default class EtherealMailProvider implements IMailProvider {
   private client: Transporter;
@@ -21,12 +23,18 @@ export default class EtherealMailProvider implements IMailProvider {
     });
   }
 
-  public async sendEmail(to: string, body: string): Promise<void> {
-    const mailOptions = {
-      from: 'eBarber Team <team@ebarber.com>',
-      to,
-      subject: 'Password recovery',
-      text: body,
+  public async sendEmail({ to, from, subject }: ISendMailDTO): Promise<void> {
+    const mailOptions: Mail.Options = {
+      from: {
+        name: from?.name || 'eBarber Team',
+        address: from?.email || 'team@ebarber.com',
+      },
+      to: {
+        name: to.name,
+        address: to.email,
+      },
+      subject,
+      text: 'test',
     };
 
     const message = await this.client.sendMail(mailOptions);
