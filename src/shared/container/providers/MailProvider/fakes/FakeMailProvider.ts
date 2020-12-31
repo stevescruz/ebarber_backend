@@ -15,3 +15,5 @@ export default class FakeMailProvider implements IMailProvider {
     });
   }
 }
+
+// NOTE: this does nothing for now.
