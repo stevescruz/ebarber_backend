@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import path from 'path';
 
 import AppError from '@shared/errors/AppError';
 
@@ -33,6 +34,13 @@ class SendEmailPasswordRecoveryService {
       user.id,
     );
 
+    const forgotPasswordTemplate = path.resolve(
+      __dirname,
+      '..',
+      'views',
+      'forgot_password.hbs',
+    );
+
     await this.mailProvider.sendEmail({
       to: {
         name: user.name,
@@ -40,10 +48,10 @@ class SendEmailPasswordRecoveryService {
       },
       subject: '[eBarber] Password Recovery',
       templateData: {
-        template: 'Hello, {{name}}: {{token}}',
+        file: forgotPasswordTemplate,
         variables: {
           name: user.name,
-          token,
+          link: `http://localhost:3000/reset_password?token=${token}`,
         },
       },
     });
