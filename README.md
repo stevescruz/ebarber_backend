@@ -91,7 +91,7 @@ This project was developed with the following technologies:
 -  [TypeORM](https://typeorm.io/#/)
 -  [PostgreSQL](https://www.postgresql.org/)
 -  [CORS](https://expressjs.com/en/resources/middleware/cors.html)
--  [UUIDv4](https://github.com/uuidjs/uuid)
+-  [UUID](https://github.com/uuidjs/uuid)
 -  [Date-fns](https://date-fns.org/)
 -  [JSON Web Token](https://github.com/auth0/node-jsonwebtoken)
 -  [Bcrypt.js](https://github.com/dcodeIO/bcrypt.js/)
