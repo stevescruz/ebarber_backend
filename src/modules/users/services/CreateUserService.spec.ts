@@ -5,15 +5,21 @@ import CreateUserService from '@modules/users/services/CreateUserService';
 
 import AppError from '@shared/errors/AppError';
 
+let fakeUsersRepository: FakeUsersRepository;
+let fakeHashProvider: FakeHashProvider;
+let createUserService: CreateUserService;
+
 describe('CreateUser', () => {
-  it('should be able to create a new user', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-    const createUserService = new CreateUserService(
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
+    fakeHashProvider = new FakeHashProvider();
+    createUserService = new CreateUserService(
       fakeUsersRepository,
       fakeHashProvider,
     );
+  });
 
+  it('should be able to create a new user', async () => {
     const user = await createUserService.execute({
       name: 'Uther the Lightbringer',
       email: 'uther@blizzard.com',
@@ -25,13 +31,6 @@ describe('CreateUser', () => {
   });
 
   it('should not be able to create a user with a previously used email', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-    const createUserService = new CreateUserService(
-      fakeUsersRepository,
-      fakeHashProvider,
-    );
-
     await fakeUsersRepository.create({
       name: 'Uther the Lightbringer',
       email: 'uther@blizzard.com',
