@@ -3,7 +3,7 @@
   **FR**
 
   - [ ] The user should be able to retrieve his password by informing his email.
-  - [ ] The user shouldn't be able to retrieve his password by informing a non-existent email.
+  - [ ] The user should not be able to retrieve his password by informing a non-existent email.
   - [ ] The user should receive an email with instructions to retrieve his password.
     - [ ] Should generate a user token for password recovery
   - [ ] The user should be able to reset his password.
@@ -30,8 +30,8 @@
 
   **BR**
 
-  - [ ] The user can't change his email to an email that has already been used.
-  - [ ] To update a password the user needs to inform their current password.
+  - [ ] The user cannot change his email to an email that has already been used.
+  - [ ] To update a password the user needs to inform his current password.
   - [ ] To update a password the user needs to confirm his new password.
 
   # Provider Panel
@@ -69,6 +69,6 @@
   - [ ] All available time slots should be comprised of 1 hour.
   - [ ] The available time slots should be between 8:00 AM and 6:00 PM
   NOTE: The 1st time slot is at 8:00 AM and the last time slot is at 5:00 PM.
-  - [ ] The user can't schedule a new appointment with a provider if the time slot is already occupied.
-  - [ ] The user can't schedule a new appointment in a time slot that is in the past.
-  - [ ] The user can't schedule a new appointment with himself as a provider.
+  - [ ] The user cannot schedule a new appointment with a provider if the time slot is already occupied.
+  - [ ] The user cannot schedule a new appointment in a time slot that is in the past.
+  - [ ] The user cannot schedule a new appointment with himself as a provider.
