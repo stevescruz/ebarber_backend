@@ -1,5 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
+import AppError from '@shared/errors/AppError';
+
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IHashProvider from '@modules/users/providers/HashProvider/models/IHashProvider';
 
@@ -23,6 +25,10 @@ export default class UpdateProfileService {
 
   async execute({ user_id, name, email }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(user_id);
+
+    if (!user) {
+      throw new AppError(`The user was not found.`, 401);
+    }
 
     user.name = name;
     user.email = email;

@@ -3,6 +3,8 @@ import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHa
 
 import UpdateProfileService from '@modules/users/services/UpdateProfileService';
 
+import AppError from '@shared/errors/AppError';
+
 let fakeUsersRepository: FakeUsersRepository;
 let fakeHashProvider: FakeHashProvider;
 
@@ -34,5 +36,15 @@ describe('UpdateProfile', () => {
 
     expect(updatedUser.name).toBe('Abaddon');
     expect(updatedUser.email).toBe('abaddon@valve.com');
+  });
+
+  it('should not be able to use a user_id that does not belong to any user.', async () => {
+    await expect(
+      updateProfileService.execute({
+        user_id: '01152646-4f19-11eb-ae93-0242ac130002',
+        name: 'Uther The Lightbringer',
+        email: 'uther@blizzard.com',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
