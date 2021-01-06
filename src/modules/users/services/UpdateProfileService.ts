@@ -48,6 +48,13 @@ export default class UpdateProfileService {
     user.name = name;
     user.email = email;
 
+    if (password && !old_password) {
+      throw new AppError(
+        `You cannot update the password without informing both the old password and the new password`,
+        401,
+      );
+    }
+
     if (password && old_password) {
       const checkOldPassword = await this.hashProvider.compareHash(
         old_password,

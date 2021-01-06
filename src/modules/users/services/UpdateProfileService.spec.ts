@@ -126,4 +126,21 @@ describe('UpdateProfile', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it("should not be able to update a user's password with the new password without old_password does not exist.", async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Arthas Menethil',
+      email: 'arthas@blizzard.com',
+      password: 'jaina',
+    });
+
+    await expect(
+      updateProfileService.execute({
+        user_id: user.id,
+        name: 'Abaddon',
+        email: 'abaddon@valve.com',
+        password: 'rylai',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });
