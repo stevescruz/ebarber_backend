@@ -47,4 +47,26 @@ describe('UpdateProfile', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it("should not be able to change a user's email to an email that belongs to another user.", async () => {
+    await fakeUsersRepository.create({
+      name: 'Arthas Menethil',
+      email: 'arthas@blizzard.com',
+      password: 'jaina',
+    });
+
+    const user = await fakeUsersRepository.create({
+      name: 'Uther The Lightbringer',
+      email: 'uther@blizzard.com',
+      password: 'arthas',
+    });
+
+    await expect(
+      updateProfileService.execute({
+        user_id: user.id,
+        name: 'Uther is dead',
+        email: 'arthas@blizzard.com',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

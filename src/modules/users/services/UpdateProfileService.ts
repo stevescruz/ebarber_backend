@@ -30,6 +30,13 @@ export default class UpdateProfileService {
       throw new AppError(`The user was not found.`, 401);
     }
 
+    const { id: findEmailOwner } =
+      (await this.usersRepository.findByEmail(email)) || {};
+
+    if (typeof findEmailOwner !== 'undefined' && findEmailOwner !== user_id) {
+      throw new AppError(`This email cannot be used.`, 401);
+    }
+
     user.name = name;
     user.email = email;
 
