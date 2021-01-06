@@ -127,7 +127,7 @@ describe('UpdateProfile', () => {
     ).rejects.toBeInstanceOf(AppError);
   });
 
-  it("should not be able to update a user's password with new_password without old_password.", async () => {
+  it("should not be able to update a user's password by informing new_password without old_password.", async () => {
     const user = await fakeUsersRepository.create({
       name: 'Arthas Menethil',
       email: 'arthas@blizzard.com',
@@ -140,6 +140,23 @@ describe('UpdateProfile', () => {
         name: 'Abaddon',
         email: 'abaddon@valve.com',
         new_password: 'rylai',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it("should not be able to update a user's password by informing old_password without new_password.", async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Arthas Menethil',
+      email: 'arthas@blizzard.com',
+      password: 'jaina',
+    });
+
+    await expect(
+      updateProfileService.execute({
+        user_id: user.id,
+        name: 'Abaddon',
+        email: 'abaddon@valve.com',
+        old_password: 'jaina',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
