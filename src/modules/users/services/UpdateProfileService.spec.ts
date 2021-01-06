@@ -87,4 +87,25 @@ describe('UpdateProfile', () => {
 
     expect(updatedUser.password).toBe('rylai');
   });
+
+  it("should be able to hash the user's new password.", async () => {
+    const generateHash = jest.spyOn(fakeHashProvider, 'generateHash');
+
+    const user = await fakeUsersRepository.create({
+      name: 'Arthas Menethil',
+      email: 'arthas@blizzard.com',
+      password: 'jaina',
+    });
+
+    const updatedUser = await updateProfileService.execute({
+      user_id: user.id,
+      name: 'Arthas Menethil',
+      email: 'Arthas Menethil',
+      old_password: 'jaina',
+      password: 'rylai',
+    });
+
+    expect(generateHash).toBeCalledWith('rylai');
+    expect(updatedUser.password).toBe('rylai');
+  });
 });
