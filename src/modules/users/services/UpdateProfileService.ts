@@ -11,6 +11,8 @@ interface IRequest {
   user_id: string;
   name: string;
   email: string;
+  old_password?: string;
+  password?: string;
 }
 
 @injectable()
@@ -23,7 +25,13 @@ export default class UpdateProfileService {
     private hashProvider: IHashProvider,
   ) {}
 
-  async execute({ user_id, name, email }: IRequest): Promise<User> {
+  async execute({
+    user_id,
+    name,
+    email,
+    old_password,
+    password,
+  }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
@@ -39,6 +47,10 @@ export default class UpdateProfileService {
 
     user.name = name;
     user.email = email;
+
+    if (password) {
+      user.password = password;
+    }
 
     return this.usersRepository.save(user);
   }

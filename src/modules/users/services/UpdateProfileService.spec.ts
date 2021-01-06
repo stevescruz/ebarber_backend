@@ -21,7 +21,7 @@ describe('UpdateProfile', () => {
     );
   });
 
-  it("should be able to update a user profile's name and email", async () => {
+  it("should be able to update a user profile's name and email.", async () => {
     const user = await fakeUsersRepository.create({
       name: 'Arthas Menethil',
       email: 'arthas@blizzard.com',
@@ -68,5 +68,23 @@ describe('UpdateProfile', () => {
         email: 'arthas@blizzard.com',
       }),
     ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it("should be able to update a user's password.", async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Arthas Menethil',
+      email: 'arthas@blizzard.com',
+      password: 'jaina',
+    });
+
+    const updatedUser = await updateProfileService.execute({
+      user_id: user.id,
+      name: 'Arthas Menethil',
+      email: 'Arthas Menethil',
+      old_password: 'jaina',
+      password: 'rylai',
+    });
+
+    expect(updatedUser.password).toBe('rylai');
   });
 });
