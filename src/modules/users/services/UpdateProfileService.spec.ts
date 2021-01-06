@@ -108,4 +108,22 @@ describe('UpdateProfile', () => {
     expect(generateHash).toBeCalledWith('rylai');
     expect(updatedUser.password).toBe('rylai');
   });
+
+  it("should not be able to update a user's password when old_password does not match the current password.", async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Arthas Menethil',
+      email: 'arthas@blizzard.com',
+      password: 'jaina',
+    });
+
+    await expect(
+      updateProfileService.execute({
+        user_id: user.id,
+        name: 'Abaddon',
+        email: 'abaddon@valve.com',
+        old_password: 'wrong-old-password',
+        password: 'rylai',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

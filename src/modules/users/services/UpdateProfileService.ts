@@ -48,7 +48,16 @@ export default class UpdateProfileService {
     user.name = name;
     user.email = email;
 
-    if (password) {
+    if (password && old_password) {
+      const checkOldPassword = await this.hashProvider.compareHash(
+        old_password,
+        user.password,
+      );
+
+      if (!checkOldPassword) {
+        throw new AppError('Incorrect password.', 401);
+      }
+
       user.password = await this.hashProvider.generateHash(password);
     }
 
