@@ -32,6 +32,7 @@
 
   - [ ] The user cannot change his email to an email that has already been used.
   - [ ] To update a password the user needs to inform his current password.
+  - [ ] To update a password the user cannot inform his current password incorrectly.
   - [ ] To update a password the user needs to confirm his new password.
 
   # Provider Panel
