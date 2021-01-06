@@ -82,7 +82,7 @@ describe('UpdateProfile', () => {
       name: 'Arthas Menethil',
       email: 'Arthas Menethil',
       old_password: 'jaina',
-      password: 'rylai',
+      new_password: 'rylai',
     });
 
     expect(updatedUser.password).toBe('rylai');
@@ -102,7 +102,7 @@ describe('UpdateProfile', () => {
       name: 'Arthas Menethil',
       email: 'Arthas Menethil',
       old_password: 'jaina',
-      password: 'rylai',
+      new_password: 'rylai',
     });
 
     expect(generateHash).toBeCalledWith('rylai');
@@ -122,12 +122,12 @@ describe('UpdateProfile', () => {
         name: 'Abaddon',
         email: 'abaddon@valve.com',
         old_password: 'wrong-old-password',
-        password: 'rylai',
+        new_password: 'rylai',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
 
-  it("should not be able to update a user's password with the new password without old_password does not exist.", async () => {
+  it("should not be able to update a user's password with new_password without old_password.", async () => {
     const user = await fakeUsersRepository.create({
       name: 'Arthas Menethil',
       email: 'arthas@blizzard.com',
@@ -139,7 +139,7 @@ describe('UpdateProfile', () => {
         user_id: user.id,
         name: 'Abaddon',
         email: 'abaddon@valve.com',
-        password: 'rylai',
+        new_password: 'rylai',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

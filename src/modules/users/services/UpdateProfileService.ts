@@ -12,7 +12,7 @@ interface IRequest {
   name: string;
   email: string;
   old_password?: string;
-  password?: string;
+  new_password?: string;
 }
 
 @injectable()
@@ -30,7 +30,7 @@ export default class UpdateProfileService {
     name,
     email,
     old_password,
-    password,
+    new_password,
   }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(user_id);
 
@@ -48,14 +48,14 @@ export default class UpdateProfileService {
     user.name = name;
     user.email = email;
 
-    if (password && !old_password) {
+    if (new_password && !old_password) {
       throw new AppError(
         `You cannot update the password without informing both the old password and the new password`,
         401,
       );
     }
 
-    if (password && old_password) {
+    if (new_password && old_password) {
       const checkOldPassword = await this.hashProvider.compareHash(
         old_password,
         user.password,
@@ -65,7 +65,7 @@ export default class UpdateProfileService {
         throw new AppError('Incorrect password.', 401);
       }
 
-      user.password = await this.hashProvider.generateHash(password);
+      user.password = await this.hashProvider.generateHash(new_password);
     }
 
     return this.usersRepository.save(user);
