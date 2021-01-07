@@ -35,14 +35,14 @@ export default class UpdateProfileService {
     const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
-      throw new AppError(`The user was not found.`, 401);
+      throw new AppError('The user was not found.', 401);
     }
 
     const { id: findEmailOwner } =
       (await this.usersRepository.findByEmail(email)) || {};
 
     if (typeof findEmailOwner !== 'undefined' && findEmailOwner !== user_id) {
-      throw new AppError(`This email cannot be used.`, 401);
+      throw new AppError('This email cannot be used.', 401);
     }
 
     user.name = name;
@@ -50,7 +50,7 @@ export default class UpdateProfileService {
 
     if ((new_password && !old_password) || (!new_password && old_password)) {
       throw new AppError(
-        `You cannot update the password without informing both the old password and the new password`,
+        'You cannot update the password without informing both the old password and the new password',
         401,
       );
     }
