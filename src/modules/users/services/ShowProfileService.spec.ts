@@ -20,12 +20,12 @@ describe('ShowProfile', () => {
       password: 'jaina',
     });
 
-    const showUser = await showProfileService.execute({ user_id: user.id });
+    const profile = await showProfileService.execute({ user_id: user.id });
 
-    expect(showUser.id).toBe(user.id);
-    expect(showUser.name).toBe(user.name);
-    expect(showUser.email).toBe(user.email);
-    expect(showUser.avatar).toBe(user.avatar);
+    expect(profile.id).toBe(user.id);
+    expect(profile.name).toBe(user.name);
+    expect(profile.email).toBe(user.email);
+    expect(profile.avatar).toBe(user.avatar);
   });
 
   it('should not be able to use a user_id that does not belong to any user.', async () => {
