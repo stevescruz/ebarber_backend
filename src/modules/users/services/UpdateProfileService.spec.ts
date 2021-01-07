@@ -80,7 +80,7 @@ describe('UpdateProfile', () => {
     const updatedUser = await updateProfileService.execute({
       user_id: user.id,
       name: 'Arthas Menethil',
-      email: 'Arthas Menethil',
+      email: 'arthas@blizzard.com',
       old_password: 'jaina',
       new_password: 'rylai',
     });
