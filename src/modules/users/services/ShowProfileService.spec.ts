@@ -31,7 +31,7 @@ describe('ShowProfile', () => {
   it('should not be able to use a user_id that does not belong to any user.', async () => {
     await expect(
       showProfileService.execute({
-        user_id: '01152646-4f19-11eb-ae93-0242ac130002',
+        user_id: 'nonexistent-user_id',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
