@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction, request } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 
 import authConfig from '@config/auth';
@@ -30,7 +30,7 @@ function ensureAuthenticated(
 
     const { sub } = decoded as ITokenPayload;
 
-    request.user = {
+    req.user = {
       id: sub,
     };
 
