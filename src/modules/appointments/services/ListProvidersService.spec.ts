@@ -1,25 +1,19 @@
-import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 
 import ListProvidersService from '@modules/appointments/services/ListProvidersService';
 
-let fakeAppointmentsRepository: FakeAppointmentsRepository;
 let fakeUsersRepository: FakeUsersRepository;
 
 let listProvidersService: ListProvidersService;
 
 describe('ListProviders', () => {
   beforeEach(() => {
-    fakeAppointmentsRepository = new FakeAppointmentsRepository();
     fakeUsersRepository = new FakeUsersRepository();
 
-    listProvidersService = new ListProvidersService(
-      fakeAppointmentsRepository,
-      fakeUsersRepository,
-    );
+    listProvidersService = new ListProvidersService(fakeUsersRepository);
   });
 
-  it('should be able to list all users that are registered service providers', async () => {
+  it('should be able to list all users that are registered service providers.', async () => {
     const users = [];
 
     users.push(
@@ -38,8 +32,32 @@ describe('ListProviders', () => {
       }),
     );
 
-    const serviceProvidersList = await listProvidersService.execute();
+    const providers = await listProvidersService.execute({});
 
-    expect(serviceProvidersList).toStrictEqual(users);
+    expect(providers).toEqual(users);
+  });
+
+  it('should not be able to list yourself as a service provider.', async () => {
+    const users = [];
+
+    const loggedUser = await fakeUsersRepository.create({
+      name: 'Uther the Lightbringer',
+      email: 'uther@blizzard.com',
+      password: 'silverorder',
+    });
+
+    users.push(
+      await fakeUsersRepository.create({
+        name: 'Arthas Menethil',
+        email: 'arthas@blizzard.com',
+        password: 'jaina',
+      }),
+    );
+
+    const providers = await listProvidersService.execute({
+      user_id: loggedUser.id,
+    });
+
+    expect(providers).toEqual(users);
   });
 });
