@@ -20,6 +20,8 @@ export default class ListProvidersService {
       except_user_id: user_id,
     });
 
+    users.map(user => delete user.password);
+
     return users;
   }
 }
