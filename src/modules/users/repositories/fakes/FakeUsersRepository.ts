@@ -20,6 +20,12 @@ class FakeUsersRepository implements IUsersRepository {
     return findUser;
   }
 
+  public async findAllProviders(): Promise<User[]> {
+    const { users } = this;
+
+    return users;
+  }
+
   public async create(userData: ICreateUserDTO): Promise<User> {
     const user = new User();
     Object.assign(user, {
