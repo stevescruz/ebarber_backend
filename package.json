@@ -2,13 +2,32 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
+  "keywords": [
+    "node",
+    "typescript"
+  ],
   "license": "MIT",
   "scripts": {
     "build": "tsc",
     "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpileOnly --ignore-watch node_modules src/shared/infra/http/server.ts",
+    "lint": "eslint '**/*.js'",
+    "lint:fix": "eslint '**/*.js' --fix",
+    "prettify": "prettier src/*.js --write",
     "start": "ts-node-dev src/shared/infra/http/server.ts",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn run lint",
+      "yarn run prettify",
+      "git add"
+    ]
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
@@ -27,7 +46,9 @@
     "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-prettier": "^3.1.3",
+    "husky": "^4.3.7",
     "jest": "^26.2.2",
+    "lint-staged": "^10.5.3",
     "prettier": "^2.0.5",
     "ts-jest": "^26.1.4",
     "ts-node-dev": "^1.0.0-pre.44",
