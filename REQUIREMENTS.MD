@@ -2,38 +2,38 @@
 
   **FR**
 
-  - [ ] The user should be able to retrieve his password by informing his email.
-  - [ ] The user should not be able to retrieve his password by informing a non-existent email.
-  - [ ] The user should receive an email with instructions to retrieve his password.
-    - [ ] Should generate a user token for password recovery
-  - [ ] The user should be able to reset his password.
-    - [ ] Should hash the user's new password.
-    - [ ] Should not be able to reset the user's password after the token is expired.
+  - [x] The user should be able to retrieve his password by informing his email.
+  - [x] The user should not be able to retrieve his password by informing a non-existent email.
+  - [x] The user should receive an email with instructions to retrieve his password.
+    - [x] Should generate a user token for password recovery
+  - [x] The user should be able to reset his password.
+    - [x] Should hash the user's new password.
+    - [x] Should not be able to reset the user's password after the token is expired.
 
   **NFR**
 
-  - [ ] Use Mailtrap for email testing during the development phase.
+  - [x] Use Mailtrap for email testing during the development phase.
   - [ ] Use Amazon SES for email testing during the production phase.
   - [ ] Send emails in the background
   NOTE: Background jobs
 
   **Business Requirement**
 
-  - [ ] The email link sent through the user's email to reset a password should expire in two hours.
-  - [ ] The user can only reset his own password.
-  - [ ] The user needs to confirm his new password after resetting his previous password.
+  - [x] The email link sent through the user's email to reset a password should expire in two hours.
+  - [x] The user can only reset his own password.
+  - [x] The user needs to confirm his new password after resetting his previous password.
 
   # Update Profile
 
   **FR**
-  - [ ] The user should be able to update his name, email and password.
+  - [x] The user should be able to update his name, email and password.
 
   **BR**
 
-  - [ ] The user cannot change his email to an email that has already been used.
-  - [ ] To update a password the user needs to inform his current password.
-  - [ ] To update a password the user cannot inform his current password incorrectly.
-  - [ ] To update a password the user needs to confirm his new password.
+  - [x] The user cannot change his email to an email that is already being used by another user.
+  - [x] To update a password the user needs to inform his current password.
+  - [x] To update a password the user cannot inform his current password incorrectly.
+  - [x] To update a password the user needs to confirm his new password.
 
   # Provider Panel
 
