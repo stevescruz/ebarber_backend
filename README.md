@@ -78,6 +78,12 @@ eBarber API makes the data that is required to provide the services available to
   - [x] Email templates with Handlebars template engine
   - [x] Send Password Recovery Email
   - [x] Password Reset
+- [x] Update User Profile
+  - [x] Refactor users test to comply with DRY principle
+  - [x] Update User Profile Service
+  - [x] Profile Controller and Routes
+- [x] Appointments
+  - [x] Refactor appointments tests to comply with DRY principle
 - [ ] More steps coming soon...
 
 ## Technologies
@@ -102,6 +108,7 @@ This project was developed with the following technologies:
 -  [Jest](https://jestjs.io/)
 -  [TSyringe](https://github.com/microsoft/tsyringe)
 -  [VS Code][vc] with [EditorConfig][vceditconfig], [ESLint][vceslint] and [Prettier][vcprettier]
+-  [Husky][husky] with [Lint-Staged][ls]
 -  [Docker](https://www.docker.com/)
 -  [DBeaver](https://dbeaver.io/)
 -  [Insomnia](https://insomnia.rest/)
@@ -134,6 +141,8 @@ This project is under the MIT license.
 
 [Get in touch with me!](https://www.linkedin.com/in/stevescruz/)
 
+[husky]: https://typicode.github.io/husky/#/
+[ls]: https://github.com/okonet/lint-staged
 [nodejs]: https://nodejs.org/
 [yarn]: https://yarnpkg.com/
 [vc]: https://code.visualstudio.com/
