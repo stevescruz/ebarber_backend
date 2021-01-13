@@ -32,7 +32,9 @@ export default class ListProviderMonthlyAvailabilityService {
       { provider_id, year, month },
     );
 
-    const daysInMonth = getDaysInMonth(new Date(year, month));
+    const daysInMonth = getDaysInMonth(new Date(year, month - 1));
+
+    console.log(daysInMonth);
 
     if (appointments) {
       for (let i = 1; i <= daysInMonth; i += 1) {

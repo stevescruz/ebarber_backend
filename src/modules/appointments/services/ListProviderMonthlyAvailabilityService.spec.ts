@@ -16,7 +16,7 @@ describe('ListProviderMonthlyAvailability', () => {
   });
 
   it('should be able to list all days and their availabiility from a given month for a given service provider', async () => {
-    const month = 12;
+    const month = 2;
 
     await fakeAppointmentsRepository.create({
       provider_id: 'ce619769-f7b3-40f8-b51f-54cbdbadb95f',
@@ -36,7 +36,7 @@ describe('ListProviderMonthlyAvailability', () => {
     const availability = await listProviderMonthlyAvailabilityService.execute({
       provider_id: 'ce619769-f7b3-40f8-b51f-54cbdbadb95f',
       year: 2021,
-      month: 12,
+      month: 2,
     });
 
     expect(availability).toEqual(
