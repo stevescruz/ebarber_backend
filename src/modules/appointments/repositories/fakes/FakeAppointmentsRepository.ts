@@ -20,13 +20,13 @@ class AppointmentsRepository implements IAppointmentsRepository {
 
   public async findProviderAppointmentsByDate({
     provider_id,
-    month,
     year,
+    month,
   }: IFindProviderAppointmentsByMonth): Promise<Appointment[]> {
     const appointments = this.appointments.filter(
       appointment =>
         appointment.provider_id === provider_id &&
-        getMonth(appointment.date) === month &&
+        getMonth(appointment.date) + 1 === month &&
         getYear(appointment.date) === year,
     );
     return appointments;

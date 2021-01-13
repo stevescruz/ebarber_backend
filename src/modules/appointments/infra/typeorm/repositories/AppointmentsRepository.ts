@@ -23,8 +23,8 @@ class AppointmentsRepository implements IAppointmentsRepository {
 
   public async findProviderAppointmentsByDate({
     provider_id,
-    month,
     year,
+    month,
   }: IFindProviderAppointmentsByMonth): Promise<Appointment[]> {
     const parsedMonth = String(month).padStart(2, '0');
 
@@ -33,7 +33,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
         provider_id,
         date: Raw(
           dateFieldName =>
-            `to_char(${dateFieldName}, 'MM-YYYY') = '${parsedMonth}-${year}'`,
+            `to_char(${dateFieldName}, 'YYYY-MM') = '${year}-${parsedMonth}'`,
         ),
       },
     });
