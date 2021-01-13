@@ -33,16 +33,10 @@ class AppointmentsRepository implements IAppointmentsRepository {
         provider_id,
         date: Raw(
           dateFieldName =>
-            `to_char(${dateFieldName}, MM-YYYY) = ${parsedMonth}-${year}`,
+            `to_char(${dateFieldName}, YYYY-MM) = ${year}-${parsedMonth}`,
         ),
       },
     });
-
-    appointments.filter(
-      appointment =>
-        appointment.date.getUTCMonth() + 1 === month &&
-        appointment.date.getUTCFullYear() === year,
-    );
 
     return appointments;
   }
