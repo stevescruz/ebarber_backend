@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { isEqual } from 'date-fns';
+import { isEqual, getMonth, getYear } from 'date-fns';
 
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
@@ -26,8 +26,8 @@ class AppointmentsRepository implements IAppointmentsRepository {
     const appointments = this.appointments.filter(
       appointment =>
         appointment.provider_id === provider_id &&
-        appointment.date.getUTCMonth() + 1 === month &&
-        appointment.date.getUTCFullYear() === year,
+        getMonth(appointment.date) === month &&
+        getYear(appointment.date) === year,
     );
     return appointments;
   }
