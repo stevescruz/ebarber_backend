@@ -2,7 +2,7 @@ import { getRepository, Repository, Raw } from 'typeorm';
 
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
-import IFindProviderAppointmentsByMonth from '@modules/appointments/dtos/IFindProviderAppointmentsByMonthDTO';
+import IFindProviderAppointmentsByMonthDTO from '@modules/appointments/dtos/IFindProviderAppointmentsByMonthDTO';
 
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
 
@@ -21,11 +21,11 @@ class AppointmentsRepository implements IAppointmentsRepository {
     return findAppointment;
   }
 
-  public async findProviderAppointmentsByDate({
+  public async findProviderAppointmentsByMonth({
     provider_id,
     year,
     month,
-  }: IFindProviderAppointmentsByMonth): Promise<Appointment[]> {
+  }: IFindProviderAppointmentsByMonthDTO): Promise<Appointment[]> {
     const parsedMonth = String(month).padStart(2, '0');
 
     const appointments = await this.ormRepository.find({

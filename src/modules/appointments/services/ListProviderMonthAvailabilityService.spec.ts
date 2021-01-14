@@ -18,11 +18,11 @@ describe('ListProviderMonthAvailability', () => {
   it('should be able to list all days and their availability from a given month for a given service provider', async () => {
     const year = 2021;
     const month = 2;
-    const firstTimeSlotStartsAt = 8;
-    const lastTimeSlotEndsAt = 18;
+    const workShiftStartsAt = 8;
+    const workShiftEndsAt = 18;
     const timeSlots = Array.from(
-      { length: lastTimeSlotEndsAt - firstTimeSlotStartsAt },
-      (_, index) => index + firstTimeSlotStartsAt,
+      { length: workShiftEndsAt - workShiftStartsAt },
+      (_, index) => index + workShiftStartsAt,
     );
 
     await Promise.all(
@@ -57,11 +57,11 @@ describe('ListProviderMonthAvailability', () => {
   it('should not be able to list as available a day without any slots', async () => {
     const year = 2030;
     const month = 5;
-    const firstTimeSlotStartsAt = 8;
-    const lastTimeSlotEndsAt = 18;
+    const workShiftStartsAt = 8;
+    const workShiftEndsAt = 18;
     const timeSlots = Array.from(
-      { length: lastTimeSlotEndsAt - firstTimeSlotStartsAt },
-      (_, index) => index + firstTimeSlotStartsAt,
+      { length: workShiftEndsAt - workShiftStartsAt },
+      (_, index) => index + workShiftStartsAt,
     );
 
     await Promise.all(
