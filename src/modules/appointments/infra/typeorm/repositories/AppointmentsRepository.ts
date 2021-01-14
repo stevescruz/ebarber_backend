@@ -2,7 +2,7 @@ import { getRepository, Repository, Raw } from 'typeorm';
 
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
-import IFindProviderAppointmentsByMonth from '@modules/appointments/dtos/IFindProviderAppointmentsByMonth';
+import IFindProviderAppointmentsByMonth from '@modules/appointments/dtos/IFindProviderAppointmentsByMonthDTO';
 
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
 
