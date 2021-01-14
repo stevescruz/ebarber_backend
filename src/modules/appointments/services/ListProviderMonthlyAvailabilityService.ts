@@ -26,28 +26,24 @@ export default class ListProviderMonthlyAvailabilityService {
     year,
     month,
   }: IRequest): Promise<IResponse> {
-    const availability = [];
-
     const appointments = await this.appointmentsRepository.findProviderAppointmentsByDate(
       { provider_id, year, month },
     );
 
-    const daysInMonth = getDaysInMonth(new Date(year, month - 1));
+    const NumberofDaysInMonth = getDaysInMonth(new Date(year, month - 1));
 
-    console.log(daysInMonth);
+    const daysOfMonthArray = Array.from(
+      { length: NumberofDaysInMonth },
+      (_, index) => index + 1,
+    );
 
-    if (appointments) {
-      for (let i = 1; i <= daysInMonth; i += 1) {
-        const foundAppointment = appointments.some(
-          appointment => getDate(appointment.date) === i,
-        );
+    const availability = daysOfMonthArray.map(day => {
+      const appointmentsInDay = appointments.filter(
+        appointment => getDate(appointment.date) === day,
+      );
 
-        availability.push({
-          day: i,
-          available: !foundAppointment,
-        });
-      }
-    }
+      return { day, available: appointmentsInDay.length < 10 };
+    });
 
     return availability;
   }
