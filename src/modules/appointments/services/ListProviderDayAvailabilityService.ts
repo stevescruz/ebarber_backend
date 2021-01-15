@@ -28,7 +28,7 @@ export default class ListProviderDayAvailability {
     month,
     day,
   }: IRequest): Promise<IResponse> {
-    const appointments = await this.appointmentsRepository.findProviderAppointmentsByDay(
+    const appointments = await this.appointmentsRepository.findAllByProviderAndDay(
       { provider_id, year, month, day },
     );
     const workShiftStartsAt = 8;
