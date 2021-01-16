@@ -12,7 +12,7 @@ describe('ListProviderDayAvailability', () => {
       fakeAppointmentsRepository,
     );
   });
-  it('should be able to list availability for time slots from a given day for a given service provider', async () => {
+  it('should be able to list availability for time slots from a given day for a given service provider.', async () => {
     const day = 15;
     const month = 12;
     const year = 2021;
@@ -68,23 +68,53 @@ describe('ListProviderDayAvailability', () => {
       ]),
     );
   });
+
+  it('should be able to list available as false for time slots with hours that already passed.', async () => {
+    const year = 2021;
+    const month = 7;
+    const day = 8;
+    const hour = 12;
+
+    jest
+      .spyOn(Date, 'now')
+      .mockImplementationOnce(() =>
+        new Date(year, month - 1, day, hour).getTime(),
+      );
+
+    const availability = await listProviderDayAvailabilityService.execute({
+      provider_id: 'ce619769-f7b3-40f8-b51f-54cbdbadb95f',
+      year,
+      month,
+      day,
+    });
+
+    expect(availability).toEqual(
+      expect.arrayContaining([
+        {
+          hour: 8,
+          available: false,
+        },
+        {
+          hour: 9,
+          available: false,
+        },
+        {
+          hour: 10,
+          available: false,
+        },
+        {
+          hour: 11,
+          available: false,
+        },
+        {
+          hour: 12,
+          available: false,
+        },
+        {
+          hour: 13,
+          available: true,
+        },
+      ]),
+    );
+  });
 });
-
-// it('should be able to list all available time slots from a given day for a given service provider', async () => {
-
-// const workShiftStartsAt = 8;
-// const workShiftEndsAt = 16;
-
-// const timeSlotsInDayArray = Array.from(
-//   { length: workShiftEndsAt - workShiftStartsAt },
-//   (_, index) => index + workShiftEndsAt,
-// );
-
-// await Promise.all(
-//   timeSlotsInDayArray.map(timeSlot => {
-//     return fakeAppointmentsRepository.create({
-//       provider_id: 'ce619769-f7b3-40f8-b51f-54cbdbadb95f',
-//       date: new Date(year, month - 1, day, timeSlot, 0, 0),
-//     });
-//   }),
-// );

@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import { getHours } from 'date-fns';
+import { getHours, isAfter } from 'date-fns';
 
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 
@@ -39,14 +39,18 @@ export default class ListProviderDayAvailability {
       (_, index) => index + workShiftStartsAt,
     );
 
+    const currentDate = new Date(Date.now());
+
     const availability = hoursOfDay.map(hour => {
       const hasAppointmentInHour = appointments.find(
         appointment => getHours(appointment.date) === hour,
       );
 
+      const timeSlotDate = new Date(year, month - 1, day, hour);
+
       return {
         hour,
-        available: !hasAppointmentInHour,
+        available: !hasAppointmentInHour && isAfter(timeSlotDate, currentDate),
       };
     });
 
