@@ -13,9 +13,15 @@ describe('ListProviderDayAvailability', () => {
     );
   });
   it('should be able to list availability for time slots from a given day for a given service provider.', async () => {
-    const day = 15;
+    const year = 2001;
     const month = 12;
-    const year = 2021;
+    const day = 15;
+
+    jest
+      .spyOn(Date, 'now')
+      .mockImplementationOnce(() =>
+        new Date(year, month - 1, day, 7).getTime(),
+      );
 
     await fakeAppointmentsRepository.create({
       provider_id: 'ce619769-f7b3-40f8-b51f-54cbdbadb95f',
