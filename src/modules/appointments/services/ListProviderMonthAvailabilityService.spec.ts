@@ -29,6 +29,7 @@ describe('ListProviderMonthAvailability', () => {
       timeSlots.map(timeSlot =>
         fakeAppointmentsRepository.create({
           provider_id: 'ce619769-f7b3-40f8-b51f-54cbdbadb95f',
+          user_id: '82ac8141-45ac-462c-a552-c1104d669099',
           date: new Date(year, month - 1, 12, timeSlot, 0, 0),
         }),
       ),
@@ -36,6 +37,7 @@ describe('ListProviderMonthAvailability', () => {
 
     await fakeAppointmentsRepository.create({
       provider_id: 'ce619769-f7b3-40f8-b51f-54cbdbadb95f',
+      user_id: '82ac8141-45ac-462c-a552-c1104d669099',
       date: new Date(year, month - 1, 13, 12, 0, 0),
     });
 
@@ -68,6 +70,7 @@ describe('ListProviderMonthAvailability', () => {
       timeSlots.map(timeSlot =>
         fakeAppointmentsRepository.create({
           provider_id: 'ce619769-f7b3-40f8-b51f-54cbdbadb95f',
+          user_id: '82ac8141-45ac-462c-a552-c1104d669099',
           date: new Date(year, month - 1, 15, timeSlot, 0, 0),
         }),
       ),
