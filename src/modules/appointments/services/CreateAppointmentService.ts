@@ -1,4 +1,4 @@
-import { startOfHour } from 'date-fns';
+import { startOfHour, isAfter } from 'date-fns';
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
@@ -25,6 +25,15 @@ class CreateAppointmentService {
     date,
   }: IRequestDTO): Promise<Appointment> {
     const appointmentDate = startOfHour(date);
+
+    const currentDate = startOfHour(new Date(Date.now()));
+
+    if (!isAfter(appointmentDate, currentDate)) {
+      throw new AppError(
+        'An appointment at a date in the past cannot be booked.',
+        401,
+      );
+    }
 
     const checkAppointmentInSameDate = await this.appointmentsRepository.findByDate(
       appointmentDate,
