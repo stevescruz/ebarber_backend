@@ -24,13 +24,19 @@ class CreateAppointmentService {
     user_id,
     date,
   }: IRequestDTO): Promise<Appointment> {
+    if (provider_id === user_id) {
+      throw new AppError(
+        'Cannot book an appointment with yourself as the user and the provider at the same time.',
+      );
+    }
+
     const appointmentDate = startOfHour(date);
 
     const currentDate = startOfHour(new Date(Date.now()));
 
     if (!isAfter(appointmentDate, currentDate)) {
       throw new AppError(
-        'An appointment at a date in the past cannot be booked.',
+        'Cannot book an appointment with at a date in the past.',
         401,
       );
     }
@@ -41,7 +47,7 @@ class CreateAppointmentService {
 
     if (checkAppointmentInSameDate) {
       throw new AppError(
-        `An appointment at ${appointmentDate} was already booked.`,
+        'Cannot book an appointment with when the provider already has another appointment at the same date.',
       );
     }
 

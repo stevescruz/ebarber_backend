@@ -76,4 +76,13 @@ describe('CreateAppointment', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+  it('should not be able to create a new appointment where the user and the provider are the same person', async () => {
+    await expect(
+      createAppointmentService.execute({
+        provider_id: '5a4edc68-d582-4653-af9b-5d425e8e384d',
+        user_id: '5a4edc68-d582-4653-af9b-5d425e8e384d',
+        date: new Date(Date.now()),
+      }),
+    );
+  });
 });
