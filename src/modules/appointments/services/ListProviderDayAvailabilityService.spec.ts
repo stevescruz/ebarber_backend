@@ -25,16 +25,19 @@ describe('ListProviderDayAvailability', () => {
 
     await fakeAppointmentsRepository.create({
       provider_id: 'ce619769-f7b3-40f8-b51f-54cbdbadb95f',
+      user_id: '82ac8141-45ac-462c-a552-c1104d669099',
       date: new Date(year, month - 1, day, 8, 0, 0),
     });
 
     await fakeAppointmentsRepository.create({
       provider_id: 'ce619769-f7b3-40f8-b51f-54cbdbadb95f',
+      user_id: '82ac8141-45ac-462c-a552-c1104d669099',
       date: new Date(year, month - 1, day, 12, 0, 0),
     });
 
     await fakeAppointmentsRepository.create({
       provider_id: 'ce619769-f7b3-40f8-b51f-54cbdbadb95f',
+      user_id: '82ac8141-45ac-462c-a552-c1104d669099',
       date: new Date(year, month - 1, day, 17, 0, 0),
     });
 
@@ -124,3 +127,20 @@ describe('ListProviderDayAvailability', () => {
     );
   });
 });
+
+// const workShiftStartsAt = 8;
+// const workShiftEndsAt = 16;
+
+// const timeSlotsInDayArray = Array.from(
+//   { length: workShiftEndsAt - workShiftStartsAt },
+//   (_, index) => index + workShiftEndsAt,
+// );
+
+// await Promise.all(
+//   timeSlotsInDayArray.map(timeSlot => {
+//     return fakeAppointmentsRepository.create({
+//       provider_id: 'ce619769-f7b3-40f8-b51f-54cbdbadb95f',
+//       date: new Date(year, month - 1, day, timeSlot, 0, 0),
+//     });
+//   }),
+// );
