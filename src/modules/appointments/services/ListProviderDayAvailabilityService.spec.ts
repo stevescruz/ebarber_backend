@@ -127,20 +127,3 @@ describe('ListProviderDayAvailability', () => {
     );
   });
 });
-
-// const workShiftStartsAt = 8;
-// const workShiftEndsAt = 16;
-
-// const timeSlotsInDayArray = Array.from(
-//   { length: workShiftEndsAt - workShiftStartsAt },
-//   (_, index) => index + workShiftEndsAt,
-// );
-
-// await Promise.all(
-//   timeSlotsInDayArray.map(timeSlot => {
-//     return fakeAppointmentsRepository.create({
-//       provider_id: 'ce619769-f7b3-40f8-b51f-54cbdbadb95f',
-//       date: new Date(year, month - 1, day, timeSlot, 0, 0),
-//     });
-//   }),
-// );
