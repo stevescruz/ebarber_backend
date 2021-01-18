@@ -1,4 +1,4 @@
-import { startOfHour, isAfter } from 'date-fns';
+import { startOfHour, isAfter, getHours } from 'date-fns';
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
@@ -27,12 +27,26 @@ class CreateAppointmentService {
     if (provider_id === user_id) {
       throw new AppError(
         'Cannot book an appointment with yourself as the user and the provider at the same time.',
+        401,
       );
     }
 
     const appointmentDate = startOfHour(date);
 
     const currentDate = startOfHour(new Date(Date.now()));
+
+    const firstSlotStartsAt = 8;
+    const lastSlotStartsAt = 17;
+
+    if (
+      getHours(appointmentDate) < firstSlotStartsAt ||
+      getHours(appointmentDate) > lastSlotStartsAt
+    ) {
+      throw new AppError(
+        'Cannot book an appointment in an hour that is before 8:00 AM or after 5:00 PM.',
+        401,
+      );
+    }
 
     if (!isAfter(appointmentDate, currentDate)) {
       throw new AppError(
