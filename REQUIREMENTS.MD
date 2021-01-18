@@ -56,10 +56,10 @@
 
   **FR**
 
-  - [ ] The user should be able to list all registered service providers.
-  - [ ] The user should be able to list all days from a given month that has at least one available time slot for a given service provider.
-  - [ ] The user should be able to list all available time slots in a given day for a given service provider.
-  - [ ] The user should be able to make a new appointment with a service provider.
+  - [x] 1. The user should be able to list all registered service providers.
+  - [x] 2. The user should be able to list all days, that have at least one available time slot, from a given month for a given service provider.
+  - [x] 3. The user should be able to list all available time slots in a given day for a given service provider.
+  - [x] 4. The user should be able to make a new appointment with a service provider.
 
   **NFR**
 
@@ -67,9 +67,10 @@
 
   **BR**
 
-  - [ ] All available time slots should be comprised of 1 hour.
-  - [ ] The available time slots should be between 8:00 AM and 6:00 PM
+  - [x] Should exclude the logged user from the list of providers. (This is for FR #1)
+  - [x] All available time slots should be comprised of 1 hour.
+  - [x] The available time slots should be between 8:00 AM and 6:00 PM
   NOTE: The 1st time slot is at 8:00 AM and the last time slot is at 5:00 PM.
-  - [ ] The user cannot schedule a new appointment with a provider if the time slot is already occupied.
-  - [ ] The user cannot schedule a new appointment in a time slot that is in the past.
-  - [ ] The user cannot schedule a new appointment with himself as a provider.
+  - [x] The user cannot schedule a new appointment with a provider if the time slot is already occupied.
+  - [x] The user cannot schedule a new appointment in a time slot that is in the past.
+  - [x] The user cannot schedule a new appointment with himself as a provider.
