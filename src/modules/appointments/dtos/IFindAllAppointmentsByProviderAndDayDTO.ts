@@ -1,4 +1,4 @@
-export default interface IFindAllByProviderAndDayDTO {
+export default interface IFindAllAppointmentsByProviderAndDayDTO {
   provider_id: string;
   year: number;
   month: number;
