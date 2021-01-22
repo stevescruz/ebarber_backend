@@ -3,7 +3,7 @@ import { getMongoRepository, MongoRepository } from 'typeorm';
 import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
 import ICreateNotificationDTO from '@modules/notifications/dtos/ICreateNotificationDTO';
 
-import Notification from '@modules/notifications/infra/typeorm/schema/Notification';
+import Notification from '@modules/notifications/infra/typeorm/schemas/Notification';
 
 export default class NotificationsRepository
   implements INotificationsRepository {
@@ -17,7 +17,7 @@ export default class NotificationsRepository
     content,
     recipient_id,
   }: ICreateNotificationDTO): Promise<Notification> {
-    const notification = await this.ormRepository.create({
+    const notification = this.ormRepository.create({
       content,
       recipient_id,
     });
