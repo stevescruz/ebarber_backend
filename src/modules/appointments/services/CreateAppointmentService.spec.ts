@@ -1,16 +1,20 @@
 import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
+import FakeNotificationsRepository from '@modules/notifications/repositories/fakes/FakeNotificationsRepository';
 import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
 
 import AppError from '@shared/errors/AppError';
 
 let fakeAppointmentsRepository: FakeAppointmentsRepository;
+let fakeNotificationsRepository: FakeNotificationsRepository;
 let createAppointmentService: CreateAppointmentService;
 
 describe('CreateAppointment', () => {
   beforeEach(() => {
     fakeAppointmentsRepository = new FakeAppointmentsRepository();
+    fakeNotificationsRepository = new FakeNotificationsRepository();
     createAppointmentService = new CreateAppointmentService(
       fakeAppointmentsRepository,
+      fakeNotificationsRepository,
     );
   });
 
@@ -109,7 +113,7 @@ describe('CreateAppointment', () => {
     ).rejects.toBeInstanceOf(AppError);
   });
 
-  it('should not be able to create an appointment after 5:00 PM.', async () => {
+  it('should not be able book an appointment after 5:00 PM.', async () => {
     const appointmentDate = new Date(Date.now());
     appointmentDate.setHours(18);
 
@@ -126,5 +130,30 @@ describe('CreateAppointment', () => {
         date: appointmentDate,
       }),
     ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it("should send a notification to the appointment's provider after successfully creating an appointment", async () => {
+    const appointmentDate = new Date(Date.now());
+    appointmentDate.setHours(8);
+
+    const year = appointmentDate.getFullYear().toString();
+    const month = (appointmentDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = appointmentDate.getDate().toString().padStart(2, '0');
+
+    const createNotification = jest.spyOn(
+      fakeNotificationsRepository,
+      'create',
+    );
+
+    await createAppointmentService.execute({
+      provider_id: '5a4edc68-d582-4653-af9b-5d425e8e384d',
+      user_id: '82ac8141-45ac-462c-a552-c1104d669099',
+      date: appointmentDate,
+    });
+
+    expect(createNotification).toHaveBeenCalledWith({
+      recipient_id: '5a4edc68-d582-4653-af9b-5d425e8e384d',
+      content: `New appointment booked with you on ${month}/${day}/${year} at 08:00 AM`,
+    });
   });
 });
