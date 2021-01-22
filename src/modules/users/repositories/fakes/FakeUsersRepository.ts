@@ -40,7 +40,7 @@ class FakeUsersRepository implements IUsersRepository {
       name: userData.name,
       email: userData.email,
       password: userData.password,
-    });
+    } as User);
     this.save(user);
 
     return user;
