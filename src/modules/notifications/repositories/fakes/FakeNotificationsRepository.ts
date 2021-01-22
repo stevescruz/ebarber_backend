@@ -1,4 +1,4 @@
-// import { v4 as uuidv4 } from 'uuid';
+import { ObjectId } from 'mongodb';
 
 import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
 import ICreateNotificationDTO from '@modules/notifications/dtos/ICreateNotificationDTO';
@@ -15,7 +15,11 @@ export default class FakeNotificationsRepository
   }: ICreateNotificationDTO): Promise<Notification> {
     const notification = new Notification();
 
-    Object.assign(notification, { recipient_id, content } as Notification);
+    Object.assign(notification, {
+      id: new ObjectId(),
+      recipient_id,
+      content,
+    } as Notification);
 
     this.notifications.push(notification);
 
