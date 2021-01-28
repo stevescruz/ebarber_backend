@@ -37,6 +37,6 @@ app.use((err: Error, req: Request, res: Response, next_: NextFunction) => {
     .json({ status: 'error', message: 'Internal server error' });
 });
 
-app.listen(3333, () => {
-  console.log('✅ - Server is listening to http://localhost:3333');
+app.listen(process.env.APP_API_PORT, () => {
+  console.log(`✅ - Server is listening to ${process.env.APP_API_URL}`);
 });
