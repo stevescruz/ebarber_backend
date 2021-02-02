@@ -13,7 +13,7 @@
   **NFR**
 
   - [x] Use Mailtrap for email testing during the development phase.
-  - [ ] Use Amazon SES for email testing during the production phase.
+  - [x] Use Amazon SES for email testing during the production phase.
   - [ ] Send emails in the background
   NOTE: Background jobs
 
@@ -39,18 +39,18 @@
 
   **FR**
 
-  - [ ] The provider should be able to list all of his appointments in a given day.
-  - [ ] The provider should receive a notification whenever a user creates a new appointment with him.
+  - [x] The provider should be able to list all of his appointments in a given day.
+  - [x] The provider should receive a notification whenever a user creates a new appointment with him.
   - [ ] The provider should be able to visualize his unread notifications.
 
   **NFR**
 
   - [ ] The provider's appointment in a given day should be stored in cache.
-  - [ ] The provider's notifications should be stored in MongoDB.
+  - [x] The provider's notifications should be stored in MongoDB.
 
   # Business Requirement
 
-  - [ ] The notification should have the unread and read states that can be toggled by the provider.
+  - [x] The notification should have the unread and read states that can be toggled by the provider.
 
   # Schedule Service Appointments
 
