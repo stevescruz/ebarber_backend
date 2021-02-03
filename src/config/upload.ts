@@ -42,6 +42,6 @@ export default {
 
   config: {
     disk: {},
-    aws: { bucket: process.env.STORAGE_SES_BUCKET },
+    aws: { bucket: process.env.AWS_SES_BUCKET },
   },
 } as IUploadConfig;
