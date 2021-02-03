@@ -7,6 +7,8 @@ import {
 } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
 
+import uploadConfig from '@config/upload';
+
 @Entity('users')
 class User {
   @PrimaryGeneratedColumn('uuid')
@@ -33,9 +35,17 @@ class User {
 
   @Expose({ name: 'avatar_url' })
   get avatarUrl(): string | null {
-    return this.avatar
-      ? `${process.env.APP_API_URL}/files/${this.avatar}`
-      : null;
+    if (!this.avatar) {
+      return null;
+    }
+    switch (uploadConfig.driver) {
+      case 'disk':
+        return `${process.env.APP_API_URL}/files/${this.avatar}`;
+      case 's3':
+        return `${process.env.AWS_SES_URL}/${this.avatar}`;
+      default:
+        return null;
+    }
   }
 }
 
