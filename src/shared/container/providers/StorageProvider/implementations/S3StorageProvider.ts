@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import { S3 } from 'aws-sdk';
+import mime from 'mime';
 
 import uploadConfig from '@config/upload';
 
@@ -17,16 +18,23 @@ export default class S3StorageProvider implements IStorageProvider {
 
   public async saveFile(fileName: string): Promise<string> {
     const originalPath = path.resolve(uploadConfig.tmpFolder, fileName);
-    const fileContent = await fs.promises.readFile(originalPath, {
-      encoding: 'utf-8',
-    });
+
+    const contentType = mime.getType(originalPath);
+
+    if (!contentType) {
+      throw new Error('File not found.');
+    }
+
+    const fileContent = await fs.promises.readFile(originalPath);
 
     await this.client
       .putObject({
-        Bucket: 'app-ebarber',
+        Bucket: uploadConfig.config.aws.bucket,
         Key: fileName,
         ACL: 'public-read',
         Body: fileContent,
+        ContentType: contentType,
+        ContentDisposition: `inline; filename=${fileName}`,
       })
       .promise();
 
@@ -38,7 +46,7 @@ export default class S3StorageProvider implements IStorageProvider {
   public async deleteFile(fileName: string): Promise<void> {
     await this.client
       .deleteObject({
-        Bucket: 'app-ebarber',
+        Bucket: uploadConfig.config.aws.bucket,
         Key: fileName,
       })
       .promise();
